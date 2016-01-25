@@ -2,22 +2,6 @@ package commands
 
 // ConfigOptions is used to set viper defaults
 var ConfigOptions = map[string]interface{}{
-	"get": map[string]interface{}{
-		"collection": map[string]interface{}{
-			"value": "",
-			"help":  "The collection to look in",
-		},
-		"id": map[string]interface{}{
-			"value": "",
-			"help":  "The id's doc to return",
-		},
-	},
-	"save": map[string]interface{}{
-		"collection": map[string]interface{}{
-			"value": "",
-			"help":  "The collection to put in",
-		},
-	},
 	"http": map[string]interface{}{
 		"addr": map[string]interface{}{
 			"value": "0.0.0.0",
@@ -35,45 +19,49 @@ var ConfigOptions = map[string]interface{}{
 			"value": "keys/http/key.pem",
 			"help":  "Key for https server",
 		},
-		"static": map[string]interface{}{
-			"value": "static",
-			"help":  "Directory which holds static content",
+		"username": map[string]interface{}{
+			"value": "user",
+			"help":  "Username to check authenticate requests against",
+		},
+		"password": map[string]interface{}{
+			"value": "pass",
+			"help":  "Password to check authenticate requests against",
 		},
 	},
-	"db": map[string]interface{}{
-		"addr": map[string]interface{}{
-			"value": "0.0.0.0",
-			"help":  "Address to bind to",
+	"call": map[string]interface{}{
+		"host": map[string]interface{}{
+			"value": "localhost",
+			"help":  "Host that the call center is running on",
 		},
-		"port": map[string]interface{}{
-			"value": 42345,
-			"help":  "Port to bind to",
+		"number": map[string]interface{}{
+			"value": "1234567890",
+			"help":  "Number to call, will return a lock on that call for ending",
 		},
-		"cert": map[string]interface{}{
-			"value": "keys/db/cert.pem",
-			"help":  "Certificate for https server",
+		"username": map[string]interface{}{
+			"value": "user",
+			"help":  "Username to authenticate with",
 		},
-		"key": map[string]interface{}{
-			"value": "keys/db/key.pem",
-			"help":  "Key for https server",
+		"password": map[string]interface{}{
+			"value": "pass",
+			"help":  "Password to authenticate with",
 		},
 	},
-	"user": map[string]interface{}{
-		"addr": map[string]interface{}{
-			"value": "0.0.0.0",
-			"help":  "Address to bind to",
+	"end": map[string]interface{}{
+		"host": map[string]interface{}{
+			"value": "localhost",
+			"help":  "Host that the call center is running on",
 		},
-		"port": map[string]interface{}{
-			"value": 32345,
-			"help":  "Port to bind to",
+		"lock": map[string]interface{}{
+			"value": "somelock",
+			"help":  "End a call by providing a lock",
 		},
-		"cert": map[string]interface{}{
-			"value": "keys/user/cert.pem",
-			"help":  "Certificate for https server",
+		"username": map[string]interface{}{
+			"value": "user",
+			"help":  "Username to authenticate with",
 		},
-		"key": map[string]interface{}{
-			"value": "keys/user/key.pem",
-			"help":  "Key for https server",
+		"password": map[string]interface{}{
+			"value": "pass",
+			"help":  "Password to authenticate with",
 		},
 	},
 }

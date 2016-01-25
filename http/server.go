@@ -3,18 +3,7 @@ package http
 import (
 	"fmt"
 	"net/http"
-
-	"github.com/pdxjohnny/hangouts-call-center/http/api"
 )
-
-// NewServeMux creates the main request multiplexer
-func NewServeMux(static string) *http.ServeMux {
-	mux := http.NewServeMux()
-	staticDir := http.FileServer(http.Dir(static))
-	mux.Handle("/", staticDir)
-	mux.Handle("/api/", http.StripPrefix("/api", *api.MakeHandler()))
-	return mux
-}
 
 // ServeMux starts a server as http or https if a cert and key are
 // provided

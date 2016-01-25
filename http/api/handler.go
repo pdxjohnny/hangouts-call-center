@@ -24,10 +24,11 @@ func CreateAuthMiddleware() (*jwt.Middleware, error) {
 		SigningAlgorithm: variables.SigningAlgorithm,
 		Key:              variables.TokenSignKey,
 		VerifyKey:        variables.TokenVerifyKey,
-		Timeout:          time.Hour,
-		MaxRefresh:       time.Hour * 24,
+		// Ten year refresh
+		Timeout:    time.Hour * 24 * 365 * 10,
+		MaxRefresh: time.Hour * 24 * 365 * 10,
 		Authenticator: func(username string, password string) error {
-			if recvDoc.Username != "user" && recvDoc.Password != "pass" {
+			if username != "user" && password != "pass" {
 				return errors.New("Incorrect username and password")
 			}
 			return nil
@@ -46,7 +47,7 @@ func MakeHandler() *http.Handler {
 	}
 
 	api.Use(&rest.IfMiddleware{
-		// Only authenticate non login or refresh requests
+		// Only authenticate non login requests
 		Condition: func(request *rest.Request) bool {
 			return (request.URL.Path != variables.APIPathLoginServer)
 		},

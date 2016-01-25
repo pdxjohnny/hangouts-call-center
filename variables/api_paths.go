@@ -1,6 +1,14 @@
 package variables
 
 const (
+	// APIPathLoginServer authenticates a client
+	APIPathLoginServer = "/login"
+	// APIPathLogin is the path to login
+	APIPathLogin = "/api" + APIPathLoginServer
+	// APIPathRefreshServer updates a clients token
+	APIPathRefreshServer = "/refresh"
+	// APIPathRefresh is the path to login
+	APIPathRefresh = "/api" + APIPathRefreshServer
 	// APIPathCallServer is the path to make a call
 	APIPathCallServer = "/call/:number"
 	// APIPathCall is the path to make a call
