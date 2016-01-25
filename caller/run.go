@@ -1,8 +1,10 @@
 package caller
 
 import (
+	"bufio"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/pdxjohnny/hangouts-call-center/api"
 	"github.com/spf13/viper"
@@ -42,4 +44,31 @@ func Run() {
 	}
 
 	fmt.Println(callerData)
+	go callerData.Listen()
+	go func() {
+		for {
+			select {
+			// End this loop on close
+			case <-callerData.Close:
+				callerData.Close <- true
+				fmt.Println("Main closing")
+				return
+			// Print errors
+			case err := <-callerData.Err:
+				fmt.Println("Main got err:", err)
+			// Print recved
+			case recv := <-callerData.Recv:
+				fmt.Println("Main got recv:", recv)
+			}
+		}
+	}()
+	scanner := bufio.NewScanner(os.Stdin)
+	for scanner.Scan() {
+		text := scanner.Text()
+		fmt.Println("Main got stdin:", text)
+		callerData.Write([]byte(text))
+	}
+	if err := scanner.Err(); err != nil {
+		fmt.Fprintln(os.Stderr, "reading standard input:", err)
+	}
 }
