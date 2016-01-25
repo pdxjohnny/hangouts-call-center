@@ -79,6 +79,6 @@ func ConfigBindFlags(cmd *cobra.Command) {
 }
 
 func ConfigEnv() {
-	viper.SetEnvPrefix("hangouts-call-center")
+	viper.SetEnvPrefix("hangouts_call_center")
 	viper.AutomaticEnv()
 }

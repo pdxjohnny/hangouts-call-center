@@ -2,12 +2,14 @@ package api
 
 import (
 	"errors"
+	"io"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/ant0ine/go-json-rest/rest"
 	"github.com/pdxjohnny/go-json-rest-middleware-jwt"
+	"golang.org/x/net/websocket"
 
 	"github.com/pdxjohnny/hangouts-call-center/variables"
 )
@@ -46,6 +48,10 @@ func MakeHandler() *http.Handler {
 		panic(err)
 	}
 
+	wsHandler := websocket.Handler(func(ws *websocket.Conn) {
+		io.Copy(ws, ws)
+	})
+
 	api.Use(&rest.IfMiddleware{
 		// Only authenticate non login requests
 		Condition: func(request *rest.Request) bool {
@@ -62,6 +68,10 @@ func MakeHandler() *http.Handler {
 		rest.Get(variables.APIPathCallServer, GetCall),
 		// For ending a call
 		rest.Get(variables.APIPathEndServer, GetEnd),
+		// For caller nodes
+		rest.Get(variables.APIPathCallerServer, func(w rest.ResponseWriter, r *rest.Request) {
+			wsHandler.ServeHTTP(w.(http.ResponseWriter), r.Request)
+		}),
 	)
 	if err != nil {
 		log.Fatal(err)

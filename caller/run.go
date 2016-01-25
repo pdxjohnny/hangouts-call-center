@@ -1,4 +1,4 @@
-package call
+package caller
 
 import (
 	"fmt"
@@ -31,17 +31,15 @@ func Run() {
 		log.Fatal("TokenData had no token")
 	}
 
-	lock, err := api.Call(
+	callerData, err := api.Caller(
 		// The call center host
 		viper.GetString("host"),
 		// Our login token
 		token,
-		// The number to call
-		viper.GetString("number"),
 	)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Println(lock)
+	fmt.Println(callerData)
 }

@@ -17,6 +17,10 @@ const (
 	APIPathEndServer = "/end/:lock"
 	// APIPathEnd is the path to end a call
 	APIPathEnd = "/api" + APIPathEndServer
+	// APIPathCallerServer is the path callers connect to via websocket
+	APIPathCallerServer = "/caller"
+	// APIPathCaller is the path callers connect to via websocket
+	APIPathCaller = "/api" + APIPathCallerServer
 )
 
 var (

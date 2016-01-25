@@ -1,6 +1,7 @@
 package end
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/pdxjohnny/hangouts-call-center/api"
@@ -24,12 +25,13 @@ func Run() {
 		log.Fatal(err)
 	}
 
-	token, ok := (*tokenData)["Token"].(string)
+	token, ok := (*tokenData)["token"].(string)
 	if ok != true {
+		fmt.Println(tokenData)
 		log.Fatal("TokenData had no token")
 	}
 
-	api.End(
+	response, err := api.End(
 		// The call center host
 		viper.GetString("host"),
 		// Our login token
@@ -37,4 +39,9 @@ func Run() {
 		// The lock to end a call
 		viper.GetString("lock"),
 	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(response)
 }
