@@ -1,0 +1,4 @@
+#!/bin/bash
+
+find ./ -type f -exec sed -i -e "s/pdxjohnny/${1}/g" {} \;
+find ./ -type f -exec sed -i -e "s/numapp/${2}/g" {} \;

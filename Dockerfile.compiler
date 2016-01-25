@@ -1,0 +1,7 @@
+FROM pdxjohnny/gox
+
+ENV GOPATH /go/src/github.com/pdxjohnny/hangouts-call-center/Godeps/_workspace:/go
+
+WORKDIR /go/src/github.com/pdxjohnny/hangouts-call-center
+
+ADD . /go/src/github.com/pdxjohnny/hangouts-call-center

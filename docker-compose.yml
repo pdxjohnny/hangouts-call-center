@@ -1,0 +1,9 @@
+web:
+  image: pdxjohnny/hangouts-call-center
+  command: /app/run http
+  ports:
+    - "12345:8080"
+  links:
+    - redis
+redis:
+  image: redis
