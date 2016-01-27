@@ -42,7 +42,7 @@ var ConfigOptions = map[string]interface{}{
 	},
 	"call": map[string]interface{}{
 		"host": map[string]interface{}{
-			"value": "http://localhost",
+			"value": "http://localhost:8080",
 			"help":  "Host that the call center is running on",
 		},
 		"number": map[string]interface{}{
@@ -60,7 +60,7 @@ var ConfigOptions = map[string]interface{}{
 	},
 	"end": map[string]interface{}{
 		"host": map[string]interface{}{
-			"value": "http://localhost",
+			"value": "http://localhost:8080",
 			"help":  "Host that the call center is running on",
 		},
 		"lock": map[string]interface{}{
@@ -78,7 +78,7 @@ var ConfigOptions = map[string]interface{}{
 	},
 	"caller": map[string]interface{}{
 		"host": map[string]interface{}{
-			"value": "http://localhost",
+			"value": "http://localhost:8080",
 			"help":  "Host that the call center is running on",
 		},
 		"username": map[string]interface{}{

@@ -1,0 +1,8 @@
+#!/bin/bash
+# set -e
+
+PRODUCT_NAME="hangouts-call-center"
+BUILD_DIR="./"
+
+go build -o ${BUILD_DIR}${PRODUCT_NAME}_`uname -s`-`uname -m` -tags netgo *.go
+
