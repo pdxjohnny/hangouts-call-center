@@ -2,13 +2,13 @@ package api
 
 import (
 	"errors"
-	"io"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/ant0ine/go-json-rest/rest"
 	"github.com/pdxjohnny/go-json-rest-middleware-jwt"
+	"github.com/spf13/viper"
 	"golang.org/x/net/websocket"
 
 	"github.com/pdxjohnny/hangouts-call-center/variables"
@@ -32,7 +32,8 @@ func CreateAuthMiddleware() (*jwt.Middleware, error) {
 		Authenticator: func(username string, password string) error {
 			log.Println("Attempting login for", username)
 			// FIXME: Make these passed in from viper
-			if username != "user" || password != "pass" {
+			if username != viper.GetString("username") ||
+				password != viper.GetString("password") {
 				return errors.New("Incorrect username and password")
 			}
 			return nil
@@ -50,27 +51,7 @@ func MakeHandler() *http.Handler {
 		panic(err)
 	}
 
-	wsHandler := websocket.Handler(func(ws *websocket.Conn) {
-		log.Println("Caller connected")
-		websocket.JSON.Send(ws, map[string]string{
-			"data": "welcome to hangouts call center",
-		})
-		// FIXME: Make these passed in from viper
-		// Send it the login info
-		websocket.JSON.Send(ws, map[string]string{
-			"set":   "gmail_user",
-			"value": "user@gmail.com",
-		})
-		websocket.JSON.Send(ws, map[string]string{
-			"set":   "gmail_pass",
-			"value": "pass",
-		})
-		// Tell it that it has the login info
-		websocket.JSON.Send(ws, map[string]string{
-			"state": "has_login_info",
-		})
-		io.Copy(ws, ws)
-	})
+	wsHandler := websocket.Handler(CallerHandler)
 
 	api.Use(&rest.IfMiddleware{
 		// Only authenticate non login requests

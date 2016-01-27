@@ -13,6 +13,13 @@ type CallData struct {
 	Number string `json:"number"`
 }
 
+// ClientInCall contains the lock that gets sent back to the client once the
+// caller is in a call for the requested number
+type ClientInCall struct {
+	Number string `json:"number"`
+	Lock   string `json:"lock"`
+}
+
 // EndData the the lock on the call which allows a client to end that call
 type EndData struct {
 	Lock string `json:"lock"`

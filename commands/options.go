@@ -27,16 +27,12 @@ var ConfigOptions = map[string]interface{}{
 			"value": "pass",
 			"help":  "Password to check authenticate requests against",
 		},
-		"redis_host": map[string]interface{}{
-			"value": "localhost",
-			"help":  "Host that the redis server is running on",
-		},
-		"redis_username": map[string]interface{}{
-			"value": "user",
+		"gmail_username": map[string]interface{}{
+			"value": "user@gmail.com",
 			"help":  "Username to authenticate with",
 		},
-		"redis_password": map[string]interface{}{
-			"value": "pass",
+		"gmail_password": map[string]interface{}{
+			"value": "gmailpass",
 			"help":  "Password to authenticate with",
 		},
 	},

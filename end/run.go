@@ -1,8 +1,10 @@
 package end
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/pdxjohnny/hangouts-call-center/api"
 	"github.com/spf13/viper"
@@ -43,5 +45,9 @@ func Run() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(response)
+	b, err := json.Marshal(response)
+	if err != nil {
+		log.Fatal(err)
+	}
+	os.Stdout.Write(b)
 }

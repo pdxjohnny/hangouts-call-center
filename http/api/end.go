@@ -13,6 +13,7 @@ import (
 func GetEnd(w rest.ResponseWriter, r *rest.Request) {
 	lock := r.PathParam("lock")
 	log.Println("Will end call with lock:", lock)
-	w.(http.ResponseWriter).Write(variables.BlankResponse)
+	Op.EndCall <- lock
+	w.(http.ResponseWriter).Write(variables.OKResponse)
 	return
 }

@@ -26,4 +26,6 @@ const (
 var (
 	// BlankResponse is so that we can send something without an EOF
 	BlankResponse = []byte("{}")
+	// OKResponse is so that we avoid unmarshal overhead
+	OKResponse = []byte("{\"OK\": true}")
 )
