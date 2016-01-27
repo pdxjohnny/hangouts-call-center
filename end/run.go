@@ -50,4 +50,5 @@ func Run() {
 		log.Fatal(err)
 	}
 	os.Stdout.Write(b)
+	fmt.Println("")
 }
