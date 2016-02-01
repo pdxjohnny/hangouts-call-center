@@ -64,9 +64,14 @@ func CallerHandler(ws *websocket.Conn) {
 			return
 		} else if err != nil {
 			log.Println("Error receiving from callerID", callerID, ":", err)
+			return
 		} else {
 			// Echo back
-			websocket.JSON.Send(ws, message)
+			err := websocket.JSON.Send(ws, message)
+			if err != nil {
+				log.Println("Error sending to callerID", callerID, ":", err)
+				return
+			}
 			// Preform actions based on state
 			switch message.State {
 			case StateNotReady:

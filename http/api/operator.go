@@ -92,8 +92,6 @@ func (o *Operator) Route() {
 			// Delete the call from the CallersInCall because it has just been ended
 			delete(o.CallersInCall, lock)
 			log.Println("Call with lock", lock, "has been ended")
-		default:
-			continue
 		}
 	}
 }
